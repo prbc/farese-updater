@@ -1,8 +1,11 @@
 FROM alpine
 
-RUN apk add --no-cache \
+RUN apk add \
       bash \
-      curl
+      curl \
+      git \
+      jq \
+      --no-cache
 
 # To prevent the error:
 #   Error: the working directory '' is invalid, it needs to be an absolute path

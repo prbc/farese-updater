@@ -5,29 +5,40 @@ set -o errexit
 # Referenced:
 #   https://docs.aws.amazon.com/lambda/latest/dg/runtimes-walkthrough.html
 
-HEADERS="$(mktemp)"
+while true
+do
+  HEADERS="$(mktemp)"
+  
+  # Get an event. The HTTP request will block until one is received
+  EVENT_DATA=$(curl -sS -LD "$HEADERS" -X GET "http://${AWS_LAMBDA_RUNTIME_API}/2018-06-01/runtime/invocation/next")
+  
+  # Extract request ID by scraping response headers received above
+  REQUEST_ID=$(grep -Fi Lambda-Runtime-Aws-Request-Id "$HEADERS" | tr -d '[:space:]' | cut -d: -f2)
+  
+  ###############################
+  # Start Farese church updater #
+  ###############################
 
-# Get an event. The HTTP request will block until one is received
-EVENT_DATA=$(curl -sS -LD "$HEADERS" -X GET "http://${AWS_LAMBDA_RUNTIME_API}/2018-06-01/runtime/invocation/next")
+  echo test
 
-# Extract request ID by scraping response headers received above
-REQUEST_ID=$(grep -Fi Lambda-Runtime-Aws-Request-Id "$HEADERS" | tr -d '[:space:]' | cut -d: -f2)
+  cd /tmp
 
-###############################
-# Start Farese church updater #
-###############################
+  git config user.name "Farese Updater"
+  git config user.email "you@example.com"
 
+  git clone --depth=1 --branch=prod https://github.com/prbc/farese.git
 
-echo test
+  cd farese
 
-
-
-
-
-
-#############################
-# End Farese church updater #
-#############################
-
-# Send the response
-curl -s -X POST "http://${AWS_LAMBDA_RUNTIME_API}/2018-06-01/runtime/invocation/$REQUEST_ID/response" -d "complete"
+  touch test
+  git add -A
+  git commit -m 'test commit'
+  git show
+  
+  #############################
+  # End Farese church updater #
+  #############################
+  
+  # Send the response
+  curl -s -X POST "http://${AWS_LAMBDA_RUNTIME_API}/2018-06-01/runtime/invocation/$REQUEST_ID/response" -d "complete"
+done
