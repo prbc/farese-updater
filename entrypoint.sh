@@ -23,8 +23,8 @@ do
 
   cd /tmp
 
-  git config user.name "Farese Updater"
-  git config user.email "you@example.com"
+  git config --global user.name "Farese Updater"
+  git config --global user.email "you@example.com"
 
   git clone --depth=1 --branch=prod https://github.com/prbc/farese.git
 
