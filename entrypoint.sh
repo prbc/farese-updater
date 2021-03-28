@@ -23,12 +23,12 @@ do
 
   cd /tmp
 
-  git config --system user.name "Farese Updater"
-  git config --system user.email "you@example.com"
-
   git clone --depth=1 --branch=prod https://github.com/prbc/farese.git
 
   cd farese
+
+  git config user.name "Farese Updater"
+  git config user.email "you@example.com"
 
   touch test
   git add -A
