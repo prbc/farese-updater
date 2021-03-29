@@ -21,7 +21,7 @@ do
 
   echo test
 
-  cd /tmp
+  cd $(mktemp -d)
 
   git clone --depth=1 --branch=prod https://github.com/prbc/farese.git
 
