@@ -40,5 +40,5 @@ do
   #############################
   
   # Send the response
-  curl -s -X POST "http://${AWS_LAMBDA_RUNTIME_API}/2018-06-01/runtime/invocation/$REQUEST_ID/response" -d "SUCCESS"
+  curl -s -X POST "http://${AWS_LAMBDA_RUNTIME_API}/2018-06-01/runtime/invocation/$REQUEST_ID/response" -d "{"StatusCode": 200,"ExecutedVersion": "$LATEST"}"
 done
