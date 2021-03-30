@@ -30,7 +30,7 @@ do
   git config user.name "Farese Updater"
   git config user.email "you@example.com"
 
-  echo "$EVENT_DATA" > map/data.json
+  echo "$EVENT_DATA" | jq > map/data.json
   git add -A
   git commit -m 'test commit'
   git show
