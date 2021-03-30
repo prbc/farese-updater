@@ -23,7 +23,7 @@ do
 
   cd $(mktemp -d)
 
-  git clone --depth=1 --branch=prod https://github.com/prbc/farese.git
+  git clone --depth=2 --branch=prod https://github.com/prbc/farese.git
 
   cd farese
 
