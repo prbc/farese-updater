@@ -40,5 +40,5 @@ do
   #############################
   
   # Send the response
-  curl -s -X POST "http://${AWS_LAMBDA_RUNTIME_API}/2018-06-01/runtime/invocation/$REQUEST_ID/response" -d "complete"
+  curl -s -X POST "http://${AWS_LAMBDA_RUNTIME_API}/2018-06-01/runtime/invocation/$REQUEST_ID/response" -d "{statusCode:200,body:"Event Handled"};"
 done
