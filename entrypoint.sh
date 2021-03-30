@@ -31,6 +31,7 @@ do
   git config user.email "you@example.com"
 
   echo "$EVENT_DATA" | jq > map/data.json
+  cat map/data.json
   git add -A
   git commit -m 'test commit'
   git show
