@@ -30,7 +30,7 @@ do
   git config user.name "Farese Updater"
   git config user.email "you@example.com"
 
-  touch test
+  echo "$EVENT_DATA" > map/data.json
   git add -A
   git commit -m 'test commit'
   git show
