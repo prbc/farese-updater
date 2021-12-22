@@ -5,21 +5,23 @@ set -o errexit
 # Referenced:
 #   https://docs.aws.amazon.com/lambda/latest/dg/runtimes-walkthrough.html
 
+env
+
 while true
 do
-  HEADERS="$(mktemp)"
+  # HEADERS="$(mktemp)"
   
   # Get an event. The HTTP request will block until one is received
-  EVENT_DATA=$(curl -sS -LD "$HEADERS" -X GET "http://${AWS_LAMBDA_RUNTIME_API}/2018-06-01/runtime/invocation/next")
+  # EVENT_DATA=$(curl -sS -LD "$HEADERS" -X GET "http://${AWS_LAMBDA_RUNTIME_API}/2018-06-01/runtime/invocation/next")
   
   # Extract request ID by scraping response headers received above
-  REQUEST_ID=$(grep -Fi Lambda-Runtime-Aws-Request-Id "$HEADERS" | tr -d '[:space:]' | cut -d: -f2)
+  # REQUEST_ID=$(grep -Fi Lambda-Runtime-Aws-Request-Id "$HEADERS" | tr -d '[:space:]' | cut -d: -f2)
   
   ###############################
   # Start Farese church updater #
   ###############################
 
-  echo test
+  # echo test
 
   cd $(mktemp -d)
 
@@ -30,7 +32,8 @@ do
   git config user.name "Farese Updater"
   git config user.email "you@example.com"
 
-  echo "$EVENT_DATA" | jq > map/data.json
+  echo "$EVENT_DATA" | jq .body | base64 -d > map/data.json
+  # echo "$EVENT_DATA" | jq > map/data.json
   cat map/data.json
   git add -A
   git commit -m 'test commit'
@@ -41,5 +44,5 @@ do
   #############################
   
   # Send the response
-  curl -s -X POST "http://${AWS_LAMBDA_RUNTIME_API}/2018-06-01/runtime/invocation/$REQUEST_ID/response" -d "{"StatusCode": 200,"ExecutedVersion": "$LATEST"}"
+  # curl -s -X POST "http://${AWS_LAMBDA_RUNTIME_API}/2018-06-01/runtime/invocation/$REQUEST_ID/response" -d "{"StatusCode": 200,"ExecutedVersion": "$LATEST"}"
 done

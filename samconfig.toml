@@ -1,0 +1,11 @@
+version = 0.1
+[default]
+[default.deploy]
+[default.deploy.parameters]
+stack_name = "farese-updater"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-1vjtnmivn1dug"
+s3_prefix = "farese-updater"
+region = "us-east-2"
+confirm_changeset = true
+capabilities = "CAPABILITY_IAM"
+image_repositories = ["HelloWorldFunction=660423837417.dkr.ecr.us-east-2.amazonaws.com/fareseupdater42d78d3c/helloworldfunction19d43fc4repo"]

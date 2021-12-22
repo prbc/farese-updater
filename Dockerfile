@@ -1,16 +1,6 @@
-FROM alpine
+FROM alpine:3.15
 
-RUN apk add \
-      bash \
-      curl \
-      git \
-      jq \
-      --no-cache
-
-# To prevent the error:
-#   Error: the working directory '' is invalid, it needs to be an absolute path
-WORKDIR /
-
+RUN apk add --no-cache github-cli
 COPY entrypoint.sh .
 
 ENTRYPOINT ["/entrypoint.sh"]
