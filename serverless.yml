@@ -1,0 +1,25 @@
+org: dbirks
+app: farese-updater
+service: farese-updater
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  # runtime: nodejs14.x
+  architecture: x86_64
+  ecr:
+    # In this section you can define images that will be built locally and uploaded to ECR
+    images:
+      farese-updater:
+        path: ./
+        platform: linux/amd64
+
+functions:
+  hello:
+    image:
+      name: farese-updater
+    # handler: handler.hello
+    events:
+      - httpApi:
+          path: /
+          method: get

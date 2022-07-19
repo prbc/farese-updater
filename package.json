@@ -1,0 +1,24 @@
+{
+  "name": "farese-updater",
+  "version": "0.0.1",
+  "description": "A lambda for the church update form to send data to.",
+  "main": "index.js",
+  "scripts": {
+    "deploy:dev": "serverless deploy --stage dev",
+    "deploy:prod": "serverless deploy --stage prod",
+    "test": "serverless invoke local"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prbc/farese-updater.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/prbc/farese-updater/issues"
+  },
+  "homepage": "https://github.com/prbc/farese-updater#readme",
+  "devDependencies": {
+    "serverless": "^3.21.0"
+  }
+}
